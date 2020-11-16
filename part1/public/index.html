@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        html,body{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f1f1f1;
+        }
+        #center{
+            position: relative;
+            width:400px;
+            margin:auto;
+            height:300px;
+            background-color: white;
+            margin-top: 100px;
+            box-shadow: 0 0 20px #ccc;
+            border-radius: 10px;
+            padding:20px;
+        }
+        .header{
+            font-size: 38px;
+            text-align: center;
+            font-weight: bold;
+            padding-top: 20px;
+        }
+        .flex-center{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type='text']{
+            
+            width:350px;
+            padding-left: 10px;
+            margin-bottom:20px;
+            height:40px;
+        }
+        button{
+            width:350px;
+            padding-left: 10px;
+            height:40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="center">
+        <p class="header">Join Room</p>
+        <div class="flex-center">
+            <input type="text" id="name" placeholder="Name" autocomplete="off"/>
+            <button onclick="join()">Join Room</button>
+        </div>
+    </div>
+    <script>
+        function join(){
+            localStorage.setItem('Name',document.getElementById('name').value);
+            window.location.href="room.html";
+        }
+    </script>
+</body>
+</html>

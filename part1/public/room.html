@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            background: #f1f1f1;
+            position: relative;
+        }
+        #center{
+            position: relative;
+            margin:auto;
+            width:800px;
+            background: white;
+            height:800px;
+            margin-top: 100px;
+            
+        }
+        .head{
+            width:100%;
+            height:60px;
+            background-color: blue;
+            font-size: 38px;
+            color:white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 10px 10px #ccc;
+        }
+        .send-msg-div{
+            width:100%;
+            position: absolute;
+            height:60px;
+            background-color: blue;
+            bottom:0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .msgs-div{
+            background-color: violet;
+            width:100%;
+        }
+        input[type='text']{
+            width:70%;
+            height:40px;
+            padding-left: 10px;
+        }
+        button{
+            width:150px;
+            height:40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="center">
+        <div class="head">Chat Room</div>
+        <div class="msgs-div"></div>
+        <div class="send-msg-div">
+            <input type="text" placeholder="Enter Message"/>
+            <button>Send</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="Toast.js"></script>
+    <script>
+        const socket=io();
+        const name=localStorage.getItem('Name');
+        if(name==undefined)window.location.href="index.html";
+        socket.emit('new-client',name+' has joined');
+        let toast = new Toast({
+            type:'info',
+            duration:5000,
+            animate:true
+        })
+        socket.on('client',(message)=>{
+            toast.show(message,()=>{})
+        })
+    </script>
+</body>
+</html>
